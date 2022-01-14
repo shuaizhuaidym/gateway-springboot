@@ -8,11 +8,13 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.springframework.stereotype.Component;
 import org.xml.sax.SAXException;
 
 import springbootvue.common.xml.RequestBuilder;
 import springbootvue.common.xml.XmlParser;
 
+@Component
 public class AuthenticationHelper {
 
 	private static String authentication_template;

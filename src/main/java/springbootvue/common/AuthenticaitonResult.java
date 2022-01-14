@@ -3,81 +3,94 @@ package springbootvue.common;
 import java.util.Map;
 
 public class AuthenticaitonResult {
-	String messageState;// true/false
+    String messageState;// true/false
 
-	String authMode;
-	String success;
-	
-	String messageCode;
-	String messageDesc;
-	
-	String accessControlResult;// Permit/Deny
+    String authMode;
+    String success;
 
-	Map<String, String> attributes;
-	String token;
+    String messageCode;
+    String messageDesc;
 
-	public String getAuthMode() {
-		return authMode;
-	}
+    String accessControlResult;// Permit/Deny
 
-	public void setAuthMode(String authMode) {
-		this.authMode = authMode;
-	}
+    Map<String, String> attributes;
+    String token;
+    
+    public AuthenticaitonResult() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	public String getSuccess() {
-		return success;
-	}
+    public AuthenticaitonResult(String messageState, String success, String messageCode, String messageDesc) {
+        super();
+        this.messageState = messageState;
+        this.success = success;
+        this.messageCode = messageCode;
+        this.messageDesc = messageDesc;
+    }
 
-	public void setSuccess(String success) {
-		this.success = success;
-	}
+    public String getAuthMode() {
+        return authMode;
+    }
 
-	public String getMessageState() {
-		return messageState;
-	}
+    public void setAuthMode(String authMode) {
+        this.authMode = authMode;
+    }
 
-	public void setMessageState(String messageState) {
-		this.messageState = messageState;
-	}
+    public String getSuccess() {
+        return success;
+    }
 
-	public String getAccessControlResult() {
-		return accessControlResult;
-	}
+    public void setSuccess(String success) {
+        this.success = success;
+    }
 
-	public void setAccessControlResult(String accessControlResult) {
-		this.accessControlResult = accessControlResult;
-	}
+    public String getMessageState() {
+        return messageState;
+    }
 
-	public Map<String, String> getAttributes() {
-		return attributes;
-	}
+    public void setMessageState(String messageState) {
+        this.messageState = messageState;
+    }
 
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
-	}
+    public String getAccessControlResult() {
+        return accessControlResult;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public void setAccessControlResult(String accessControlResult) {
+        this.accessControlResult = accessControlResult;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
 
-	public String getMessageCode() {
-		return messageCode;
-	}
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
 
-	public void setMessageCode(String messageCode) {
-		this.messageCode = messageCode;
-	}
+    public String getToken() {
+        return token;
+    }
 
-	public String getMessageDesc() {
-		return messageDesc;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public void setMessageDesc(String messageDesc) {
-		this.messageDesc = messageDesc;
-	}
+    public String getMessageCode() {
+        return messageCode;
+    }
+
+    public void setMessageCode(String messageCode) {
+        this.messageCode = messageCode;
+    }
+
+    public String getMessageDesc() {
+        return messageDesc;
+    }
+
+    public void setMessageDesc(String messageDesc) {
+        this.messageDesc = messageDesc;
+    }
 
 }
