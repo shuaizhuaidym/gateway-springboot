@@ -29,6 +29,12 @@ public class RandomController {
 
 	int random_length = 32;
 
+	/**
+	 * 生成随机数接口
+	 * @return
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	@RequestMapping(value="/random")
 	public Map<String, Object> random() throws IOException, ServletException {
 		boolean pinCode = configure.isPin_code();

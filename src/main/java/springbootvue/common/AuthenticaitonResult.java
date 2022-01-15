@@ -13,9 +13,22 @@ public class AuthenticaitonResult {
 
 	String accessControlResult;// Permit/Deny
 
+	String token;
+
 	List<springbootvue.common.Attribute> attributes;
 	
-	String token;
+	
+	public AuthenticaitonResult() {
+		super();
+	}
+
+	public AuthenticaitonResult(String messageState, String success, String messageCode, String messageDesc) {
+		super();
+		this.messageState = messageState;
+		this.success = success;
+		this.messageCode = messageCode;
+		this.messageDesc = messageDesc;
+	}
 
 	public String getAuthMode() {
 		return authMode;
