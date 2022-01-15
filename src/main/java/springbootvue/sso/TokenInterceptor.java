@@ -2,9 +2,9 @@ package springbootvue.sso;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,19 +16,17 @@ public class TokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        
+
         Logger logger = LoggerFactory.getLogger(TokenInterceptor.class);
 
         String token = request.getHeader(header_token);
         ObjectMapper mapper = new ObjectMapper();
         AuthenticaitonResult result;
         response.setCharacterEncoding("UTF-8");
-        
+
         System.out.println(handler.getClass().getTypeName());
-        if (!StringUtils.hasText(token)) {
-            // TODO code
-            logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+handler.getClass().getName());
-            logger.warn("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"+request.getRemoteAddr());
+        if (StringUtils.isBlank(token)) {
+            logger.warn("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + request.getRemoteAddr());
             result = new AuthenticaitonResult("true", "false", "A00F000", "用户未认证。");
             response.getWriter().write(mapper.writeValueAsString(result));
             return false;
@@ -40,8 +38,8 @@ public class TokenInterceptor implements HandlerInterceptor {
             response.getWriter().write(mapper.writeValueAsString(result));
             return false;
         }
-        
-        if (!StringUtils.pathEquals("false", result.getMessageState())) {
+
+        if (!StringUtils.equals("false", result.getMessageState())) {
             response.getWriter().write(mapper.writeValueAsString(result));
             return false;
         }
