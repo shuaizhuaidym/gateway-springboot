@@ -61,11 +61,8 @@ public class XMLParserTest {
 	public void testParseAuthenticationResult() throws SAXException, IOException {
 		AuthenticaitonResult x = new XmlParser().parseAuthenticationResult(this.initResult());
 		Assert.assertEquals("Auth result is not success=true", "true", x.getSuccess());
-		Assert.assertEquals("Subject not patch", "CN=yanming_dai,E=yanming_dai@jit.com.cn,O=JIT,C=CN",
-				x.getAttributes().get("X509Certificate.SubjectDN"));
 
 		System.out.println("success:" + x.getSuccess());
-		System.out.println("X509Certificate.SubjectDN:" + x.getAttributes().get("X509Certificate.SubjectDN"));
 
 	}
 }

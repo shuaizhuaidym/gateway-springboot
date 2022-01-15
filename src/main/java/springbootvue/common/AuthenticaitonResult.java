@@ -1,19 +1,20 @@
 package springbootvue.common;
 
-import java.util.Map;
+import java.util.List;
 
 public class AuthenticaitonResult {
 	String messageState;// true/false
 
 	String authMode;
 	String success;
-	
+
 	String messageCode;
 	String messageDesc;
-	
+
 	String accessControlResult;// Permit/Deny
 
-	Map<String, String> attributes;
+	List<springbootvue.common.Attribute> attributes;
+	
 	String token;
 
 	public String getAuthMode() {
@@ -48,14 +49,6 @@ public class AuthenticaitonResult {
 		this.accessControlResult = accessControlResult;
 	}
 
-	public Map<String, String> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
-	}
-
 	public String getToken() {
 		return token;
 	}
@@ -78,6 +71,14 @@ public class AuthenticaitonResult {
 
 	public void setMessageDesc(String messageDesc) {
 		this.messageDesc = messageDesc;
+	}
+
+	public List<springbootvue.common.Attribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<springbootvue.common.Attribute> attributes) {
+		this.attributes = attributes;
 	}
 
 }

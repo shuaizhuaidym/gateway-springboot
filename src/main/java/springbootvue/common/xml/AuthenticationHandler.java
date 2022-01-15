@@ -1,12 +1,13 @@
 package springbootvue.common.xml;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import springbootvue.common.Attribute;
 import springbootvue.common.AuthenticaitonResult;
 /**
  * @author daiyma
@@ -16,33 +17,34 @@ public class AuthenticationHandler extends DefaultHandler {
 
 	private AuthenticaitonResult result = new AuthenticaitonResult();
 
-	private Map<String, String> attrs = new HashMap<>();
+	private List<springbootvue.common.Attribute> attrs = new ArrayList<>();
 
-	private String name = "";
+//	private String name = "";
 
 	private String value = "";
+	
+	private springbootvue.common.Attribute attr;
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if ("message".equals(qName)) {
 			result = new AuthenticaitonResult();
 		}
-		// FIXME error when auth failed
 		if ("authResult".equals(qName)) {
 			result.setAuthMode(attributes.getValue("authMode"));
 			result.setSuccess(attributes.getValue("success"));
 		}
 		if ("attributes".equals(qName)) {
-			attrs = new HashMap<>();
+			attrs = new ArrayList<>();
 		}
 		if ("attr".equals(qName)) {
-			name = attributes.getValue("name");
+			attr = new Attribute(attributes.getValue("name"),attributes.getValue("namespace"));
 		}
 		if ("token".equals(qName)) {
-			name = qName;
+//			name = qName;
 		}
 		if ("messageState".equals(qName)) {
-			name = qName;
+//			name = qName;
 		}
 
 	}
@@ -61,7 +63,6 @@ public class AuthenticationHandler extends DefaultHandler {
 		
 		if ("messageCode".equals(qName)) {
 			result.setMessageCode(value);
-			//TODO 错误场景1
 			result.setSuccess("false");
 		}
 		if ("messageDesc".equals(qName)) {
@@ -73,7 +74,7 @@ public class AuthenticationHandler extends DefaultHandler {
 		}
 
 		if ("attr".equals(qName)) {
-			attrs.put(name, value);
+			attr.setValue(value);
 		}
 		if ("attributes".equals(qName)) {
 			result.setAttributes(attrs);
