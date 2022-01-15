@@ -25,7 +25,7 @@ public class TokenInterceptor implements HandlerInterceptor {
         response.setCharacterEncoding("UTF-8");
 
         System.out.println(handler.getClass().getTypeName());
-        if (StringUtils.isBlank(token)) {
+        if (StringUtils.isEmpty(token)||StringUtils.equals("null", token)) {
             logger.warn("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + request.getRemoteAddr());
             result = new AuthenticaitonResult("true", "false", "A00F000", "用户未认证。");
             response.getWriter().write(mapper.writeValueAsString(result));
