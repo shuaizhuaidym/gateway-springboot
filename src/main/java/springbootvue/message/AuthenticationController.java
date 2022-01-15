@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import springbootvue.common.AuthenticaitonResult;
 import springbootvue.common.AuthenticationHelper;
 import springbootvue.common.GatewayConfigurationProp;
@@ -36,6 +39,7 @@ public class AuthenticationController {
 	 * @param key_pin 留空
 	 * @return
 	 */
+    @SuppressWarnings({"unchecked"})
     @RequestMapping(value = "/authenticate")
     public AuthenticaitonResult authenticate(@RequestParam(value = "authMode", required = false) String authMode,
             @RequestParam(value = "original", required = false) String original,
@@ -45,11 +49,18 @@ public class AuthenticationController {
             @RequestBody String body, HttpServletRequest hrequest) {
 
         Map<String, String> request = new HashMap<String, String>();
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, String> tmpMap = null;
+        try {
+            tmpMap = mapper.readValue(body, java.util.Map.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 
-        request.put("authMode", authMode);
+        request.put("authMode", tmpMap.get("authMode"));
         request.put("clientIP", "127.0.0.1");
-        request.put("detach", signed_data);
-        request.put("original", Base64.encodeBase64String(original.getBytes()));
+        request.put("detach", tmpMap.get("signature"));
+        request.put("original", Base64.encodeBase64String(tmpMap.get("original").getBytes()));
 
         request.put("pinCode", pinCode);
         request.put("key_pin", key_pin);

@@ -39,6 +39,7 @@ public class AuthenticationHandler extends DefaultHandler {
 		}
 		if ("attr".equals(qName)) {
 			attr = new Attribute(attributes.getValue("name"),attributes.getValue("namespace"));
+			attrs.add(attr);
 		}
 		if ("token".equals(qName)) {
 //			name = qName;
